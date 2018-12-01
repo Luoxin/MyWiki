@@ -1,0 +1,12 @@
+# MySQL2059连接错误解决方案
+
+1. Plan 1  
+    将以下指令输入到MySQL中，修改加密规则
+    
+    `
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER; #修改加密规则 
+    ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; #更新一下用户的密码 
+    FLUSH PRIVILEGES; #刷新权限
+    `
+
+1. 更新驱动
