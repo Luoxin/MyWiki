@@ -4,12 +4,242 @@
 
 假定读者是有一定编程经验的程序员or码农，所以我们不用HelloWord作为教程的开头，我们换一种方式
 
-```python
+```Python
+print("我们不是HelloWord，main外")
 
+if __name__ == '__main__':  # 运行的主函数，可以不写也可以运行，但是外的先运行，内的后运行，但是为了函数的美观性，最好写
+    print("我们不是HelloWord，双引号")  # print在python3中变成了函数，引号内为输出的内容
+    print('我们不是HelloWord，单引号')  # print在python3中变成了函数，引号内为输出的内容
 ```
-
-
+在Python中，注释：以 "#" 为开头
 
 ## Python的变量
 
 ### 基础变量
+
+Python的变量和其他编程语言差不多，虽然Python为弱类型语言，但是仍然不是每一个不同的类型都是可以相互转换的
+
+```Python
+is_str = "我的一个string类型"  # 定义一个字符串类型
+print(is_str, type(is_str))
+
+is_int = 10  # 定义一个整型
+print(is_int, type(is_int))
+
+is_float = 10.0  # 定义一个浮点型,Python中没有double类型
+print(is_float, type(is_float))
+
+is_bool = True  # 定义一个布尔类型
+print(is_bool, type(is_bool))
+```
+
+### 其他常用的变量
+
+#### list(列表)
+
+```Python
+'''
+list是列表，类似于数组，不过Python的数据内的数据类型是可变的
+'''
+
+# 定义方法
+is_list = []
+print(is_list, type(is_list))
+
+is_list = list()
+print(is_list, type(is_list))
+
+is_list = [i for i in range(10)]  # 通过迭代器生成列表，暂且记得有这种用法，后面会详细说明
+print(is_list, type(is_list))
+
+
+print("*" * 40)
+# list的常用方法
+is_list_initial = [i for i in range(10)]
+print("这是一个原始的list", is_list_initial, type(is_list_initial))
+
+print(is_list_initial[4])  # 通过索引获取值
+
+is_list_initial.append(10)  # 通过append函数,只能添加到对位
+print("通过append函数,只能添加到对位", is_list_initial, type(is_list_initial))
+
+is_list_initial.insert(0, "start")  # 通过insert函数将元素添加到指定位置
+print("通过insert函数将元素添加到指定位置", is_list_initial, type(is_list_initial))
+
+print(is_list_initial.pop(0))  # 通过pop将第一位元素返回并删除，默认为移除最后一位
+print("通过pop将第一位元素返回并删除，默认为移除最后一位", is_list_initial, type(is_list_initial))
+
+is_list_initial.remove(0)  # 通过remove移除第一位
+print("通过remove移除第一位", is_list_initial, type(is_list_initial))
+
+print("查找3所在的位置", is_list_initial.index(3), type(is_list_initial))# 查找3所在的位置
+
+print("输出长度", is_list_initial.__len__(), type(is_list_initial))# 输出长度
+
+print("查找5出现的次数", is_list_initial.count(5), type(is_list_initial))# 查找5出现的次数
+```
+
+#### dict(字典)
+
+```Python
+'''
+字典是另一种可变容器模型，且可存储任意类型对象
+字典的每个键值(key=>value)对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中 ,格式如下所示：
+d = {key1 : value1, key2 : value2 }
+'''
+
+# 定义方法
+is_dict = dict()
+print(is_dict, type(is_dict))
+
+is_dict = {}
+print(is_dict, type(is_dict))
+
+# dict的常用方法
+is_dict = {'Name': 'Runoob', 'Age': 7, 'Class': 'First'}
+
+print(is_dict["Name"])  # 通过key获取值
+
+print(is_dict.keys())  # 打印所有key
+print(is_dict.values())  # 所有value
+print(is_dict.items())  # 整个字典
+
+print(is_dict.__len__())  # 输出长度
+
+# 增加修改值
+is_dict[1] = 10  # 增加值
+print(is_dict)
+
+is_dict[1] = 11  # 修改值
+print(is_dict)
+
+del is_dict[1]  # 删除值
+print(is_dict)
+
+is_dict.pop("Age")
+print(is_dict)
+
+print(is_dict.popitem())  # 随机输出一个键值对并删除
+print(is_dict)
+```
+
+#### tuple(元组)
+
+```Python
+'''
+tuple是不可以修改是list
+'''
+
+
+# 定义
+is_tuple = tuple()
+print(is_tuple, type(is_tuple))
+
+is_tuple = (1,)  # 元组只有一个的时候，必须加一个逗号
+print(is_tuple, type(is_tuple))
+```
+
+#### set(集合)
+
+```Python
+'''
+set是元素不可重复的list
+'''
+
+is_list = [i for i in range(5)]
+print(is_list, type(is_list))
+
+is_list.append(1)
+print(is_list, type(is_list))
+
+is_set = set(is_list)
+print(is_set, type(is_set))
+
+is_set.add("end")  # 添加
+print(is_set, type(is_set))
+
+is_set.pop()  # 返回一个值并删除
+print(is_set, type(is_set))
+
+x = set('spam')
+y = set(['h', 'a', 'm'])
+
+
+s = set([3, 5, 9, 10])  # 创建一个数值集合
+
+t = set("Hello")  # 创建一个唯一字符的集合
+
+
+a = t | s  # t 和 s的并集
+print(a)
+
+b = t & s  # t 和 s的交集
+print(b)
+
+c = t - s  # 求差集（项在t中，但不在s中）
+print(c)
+
+d = t ^ s  # 对称差集（项在t或s中，但不会同时出现在二者中）
+print(s)
+
+s.issubset(t)  # s <= t测试是否s中的每一个元素都在t中
+
+s.issuperset(t)  # s >= t测试是否t中的每一个元素都在s中
+
+s.union(t)  # s | t返回一个新的set包含s和t中的每一个元素
+
+s.intersection(t)  # s & t返回一个新的set包含s和t中的公共元素
+
+s.difference(t)  # s - t返回一个新的set包含s中有但是t中没有的元素
+
+s.intersection_update(t)  # s &= t返回只保留含有set “t”中元素的set “s”
+
+s.difference_update(t)  # s -= t返回删除了set “t”中含有的元素后的set “s”
+
+s.symmetric_difference_update(t)  # s ^= t返回含有set “t”或者set “s”中有而不是两者都有的元素的set “s”
+
+s.discard(x)  # 如果在set “s”中存在元素x, 则删除
+
+s.clear()  # 删除set “s”中的所有元素
+```
+
+## Python常用语法
+
+```Python
+# 常用的计算
+a = 1
+b = 2
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a % b)
+
+a += b
+print(a)
+
+print("*" * 40)
+# 判断语句
+if a == 3:
+    print("a == 1")
+
+print("*" * 40)
+if a != 3:
+    print("a == 1")
+elif b == 2:
+    print("b == 2")
+
+print("*" * 40)
+if a != 3:
+    print("a == 1")
+elif b != 2:
+    print("b == 2")
+else:
+    print("other")
+
+print("*" * 40)
+# 循环语句
+for index, value in enumerate(range(10)):  # range是创建一个list
+    print(index, value)
+```
+
