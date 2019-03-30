@@ -1,0 +1,27 @@
+<h1 id="kafka的安装教程">Kafka的安装教程</h1>
+<h3 id="windows">Windows</h3>
+<ul>
+<li><p>安装Java环境</p></li>
+<li><p>安装Scala</p></li>
+<li><p>安装ZooKeeper(https://www.apache.org/dyn/closer.cgi/zookeeper/)</p>
+<ul>
+<li>运行 <code>zkServer.cmd</code></li>
+</ul></li>
+<li><p>下载Kafka</p>
+<ul>
+<li>下载地址：<code>http://www.rabbitmq.com/download.html</code></li>
+<li>注意Scala的版本对应</li>
+</ul></li>
+<li><p>环境变量</p>
+<ul>
+<li><code>KAFKA_HOME</code> 安装目录</li>
+<li><code>PATH</code> <code>%KAFKA_HOME%\bin\windows</code></li>
+</ul></li>
+<li><p>在 <code>bin\windows\kafka-run-class.bat</code> 中修改 <code>set COMMAND=%JAVA% %KAFKA_HEAP_OPTS% %KAFKA_JVM_PERFORMANCE_OPTS% %KAFKA_JMX_OPTS% %KAFKA_LOG4J_OPTS% -cp %CLASSPATH% %KAFKA_OPTS% %*</code>为<code>set COMMAND=%JAVA% %KAFKA_HEAP_OPTS% %KAFKA_JVM_PERFORMANCE_OPTS% %KAFKA_JMX_OPTS% %KAFKA_LOG4J_OPTS% -cp "%CLASSPATH%" %KAFKA_OPTS% %*</code></p></li>
+<li><p>运行<code>.\bin\windows\kafka-server-start.bat    .\config\server.properties</code>,运行kafka服务器</p></li>
+<li><p>server.properties的相关设置</p>
+<ul>
+<li>log.retention.hours=168 日志保留时间</li>
+<li>log.dirs=/tmp/kafka-logs 日志存储位置</li>
+</ul></li>
+</ul>

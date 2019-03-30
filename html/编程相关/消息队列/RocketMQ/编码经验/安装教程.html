@@ -1,0 +1,24 @@
+<h1 id="rocketmq的安装教程">RocketMQ的安装教程</h1>
+<h3 id="windows">Windows</h3>
+<ul>
+<li>下载RocketMQ: <code>http://rocketmq.apache.org/release_notes/</code>
+<ul>
+<li>选择 <code>Binary</code> 进行下载</li>
+</ul></li>
+<li>配置环境变量
+<ul>
+<li>配置 <code>ROCKETMQ_HOME</code> 为安装目录</li>
+</ul></li>
+<li>运行
+<ul>
+<li><code>./bin</code> 目录下 <code>start mqnamesrv.cmd</code> 启动 <code>NAMESERVER</code></li>
+<li><code>./bin</code> 目录下 <code>start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true</code> 启动 <code>BROKER</code></li>
+</ul></li>
+<li>拓展安装
+<ul>
+<li><code>git clone https://github.com/apache/rocketmq-externals.git</code></li>
+<li>在 <code>rocketmq-console</code> 中执行 <code>mvn package</code></li>
+<li>此时在 <code>rocketmq-console/target</code> 目录下生成了一个叫 <code>rocketmq-console-ng-1.0.0.jar</code> 的jar包</li>
+<li>进入 <code>target</code>目录，执行<code>java -jar rocketmq-console-ng-1.0.0.jar --server.port=12581 --rocketmq.config.namesrvAddr=10.89.0.64:9876;10.89.0.65:9876</code></li>
+</ul></li>
+</ul>
