@@ -1,0 +1,29 @@
+<h1 id="flask入门基础">Flask入门基础</h1>
+<h4 id="第一个flask程序以及部分说明">第一个flask程序以及部分说明</h4>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># 从flask这个框架中导入Flask这个类</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="im">from</span> flask <span class="im">import</span> Flask</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co"># 初始化一个Flask对象</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co"># Flaks()</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co"># 需要传递一个参数__name__</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co"># 1. 方便flask框架去寻找资源</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co"># 2. 方便flask插件比如Flask-Sqlalchemy出现错误的时候，好去寻找问题所在的位置</span></a>
+<a class="sourceLine" id="cb1-9" title="9">app <span class="op">=</span> Flask(<span class="va">__name__</span>)</a>
+<a class="sourceLine" id="cb1-10" title="10"></a>
+<a class="sourceLine" id="cb1-11" title="11"></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="co"># @app.route是一个装饰器</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="co"># @开头，并且在函数的上面，说明是装饰器</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="co"># 这个装饰器的作用，是做一个url与视图函数的映射</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="co"># 127.0.0.1:5000/   -&gt;  去请求hello_world这个函数，然后将结果返回给浏览器</span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="at">@app.route</span>(<span class="st">&#39;/&#39;</span>)</a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="kw">def</span> hello_world():</a>
+<a class="sourceLine" id="cb1-18" title="18">    <span class="cf">return</span> <span class="st">&#39;我是第一个flask程序&#39;</span></a>
+<a class="sourceLine" id="cb1-19" title="19"></a>
+<a class="sourceLine" id="cb1-20" title="20"></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="co"># 如果当前这个文件是作为入口程序运行，那么就执行app.run()</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</a>
+<a class="sourceLine" id="cb1-23" title="23">    <span class="co"># app.run()</span></a>
+<a class="sourceLine" id="cb1-24" title="24">    <span class="co"># 启动一个应用服务器，来接受用户的请求</span></a>
+<a class="sourceLine" id="cb1-25" title="25">    <span class="co"># while True:</span></a>
+<a class="sourceLine" id="cb1-26" title="26">    <span class="co">#   listen()</span></a>
+<a class="sourceLine" id="cb1-27" title="27">    app.run()</a></code></pre></div>

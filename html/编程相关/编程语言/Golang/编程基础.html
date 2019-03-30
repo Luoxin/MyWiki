@@ -1,0 +1,154 @@
+<h1 id="golang-编程基础">Golang 编程基础</h1>
+<h4 id="注意事项">注意事项</h4>
+<ul>
+<li><p>只有package名称为main的包可以包含main函数</p></li>
+<li><p>一个可执行程序只可以有一个main</p></li>
+<li><p>可见性规则</p>
+<ul>
+<li>函数名首字母大写为public</li>
+<li>函数名首字母小写为private</li>
+</ul>
+<p>#### 一般的代码架构</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb1-1" title="1"><span class="co">// 当前程序的包名，需放在所有代码之前</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">package</span> main</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">// 导入其它的包</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">import</span> std <span class="st">&quot;fmt&quot;</span>  <span class="co">//std是重命名，类似于Python中的import fmt  as std</span></a>
+<a class="sourceLine" id="cb1-6" title="6"></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">/*</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">import . &quot;fmt&quot; //省略调用，可以在程序中省略包名直接使用</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">*/</span></a>
+<a class="sourceLine" id="cb1-10" title="10"></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="co">/*</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="co">import {</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="co">    &quot;fmt&quot;,</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="co">    &quot;os&quot;,</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="co">    &quot;time&quot;</span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="co">}</span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="co">*/</span></a>
+<a class="sourceLine" id="cb1-18" title="18"></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="co">// 常量的定义</span></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="kw">const</span> PI = <span class="dv">3</span><span class="fl">.14</span></a>
+<a class="sourceLine" id="cb1-21" title="21"></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="co">// 全局变量的声明与赋值</span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="kw">var</span> name = <span class="st">&quot;gopher&quot;</span></a>
+<a class="sourceLine" id="cb1-24" title="24"></a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="co">// 一般类型声明</span></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="kw">type</span> newType <span class="dt">int</span></a>
+<a class="sourceLine" id="cb1-27" title="27"></a>
+<a class="sourceLine" id="cb1-28" title="28"><span class="co">// 结构的声明</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="kw">type</span> gopher <span class="kw">struct</span>{}</a>
+<a class="sourceLine" id="cb1-30" title="30"></a>
+<a class="sourceLine" id="cb1-31" title="31"><span class="co">// 接口的声明</span></a>
+<a class="sourceLine" id="cb1-32" title="32"><span class="kw">type</span> golang <span class="kw">interface</span>{}</a>
+<a class="sourceLine" id="cb1-33" title="33"></a>
+<a class="sourceLine" id="cb1-34" title="34"><span class="co">// 由 main 函数作为程序入口点启动</span></a>
+<a class="sourceLine" id="cb1-35" title="35"><span class="kw">func</span> main() {</a>
+<a class="sourceLine" id="cb1-36" title="36">    std.Println(<span class="st">&quot;Hello world!你好，世界！&quot;</span>)</a>
+<a class="sourceLine" id="cb1-37" title="37">}</a></code></pre></div></li>
+</ul>
+<h4 id="数据类型">数据类型</h4>
+<table>
+<thead>
+<tr class="header">
+<th>数据类型</th>
+<th>关键字</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>布尔</td>
+<td>bool</td>
+<td>长度：1字节<br />取值范围：true，false<br />不可用数字代替true和false</td>
+</tr>
+<tr class="even">
+<td>整型</td>
+<td>int/uint<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></td>
+<td>根据运行平台为32/64位</td>
+</tr>
+<tr class="odd">
+<td>8位整型</td>
+<td>int8/uint8</td>
+<td>长度：1字节<br />取值范围：-128<sub>127/0</sub>255</td>
+</tr>
+<tr class="even">
+<td>16位整型</td>
+<td>int16/uint16</td>
+<td>长度：2字节</td>
+</tr>
+<tr class="odd">
+<td>32位整型</td>
+<td>int32(<em>rune</em>)/uint32</td>
+<td>长度：4字节</td>
+</tr>
+<tr class="even">
+<td>64位整型</td>
+<td>int64/uint64</td>
+<td>长度：8字节</td>
+</tr>
+<tr class="odd">
+<td>浮点型</td>
+<td>float32/float64</td>
+<td>长度：4/8字节<br />小数位：精确到7/15位小数</td>
+</tr>
+<tr class="even">
+<td>字节类型</td>
+<td>byte(<em>uint8</em>)</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>复数</td>
+<td>complex64/complex128</td>
+<td>长度：8/16字节</td>
+</tr>
+<tr class="even">
+<td>足够保存指针的32/64位整数型</td>
+<td>uintptr</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>其他值类型</td>
+<td>array<br />struct<br />string</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>引用类型</td>
+<td>slice<br />map<br />chan</td>
+<td>slice 切片<br />chan 通道</td>
+</tr>
+<tr class="odd">
+<td>接口类型</td>
+<td>interface</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>函数类型</td>
+<td>func</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>类型零值：默认值
+<ul>
+<li>通常为0</li>
+<li>bool为false</li>
+<li>string为空字符串</li>
+</ul></li>
+<li>math 数学工具包</li>
+</ul>
+<h4 id="变量的声明与赋值">变量的声明与赋值</h4>
+<ul>
+<li>声明格式： var <变量名> <变量类型></li>
+<li>变量赋值： <变量名> = <表达式></li>
+<li>声明并赋值： var <变量名> [变量类型] = <表达式></li>
+<li>简化的赋值： <变量名> := <表达式></li>
+<li>不存在隐式转换，必须显示声明</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>没有u的为有符号数，有u的为无符号数<a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+</ol>
+</section>
