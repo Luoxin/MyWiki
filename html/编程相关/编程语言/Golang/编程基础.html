@@ -140,11 +140,220 @@
 </ul>
 <h4 id="变量的声明与赋值">变量的声明与赋值</h4>
 <ul>
-<li>声明格式： var <变量名> <变量类型></li>
-<li>变量赋值： <变量名> = <表达式></li>
-<li>声明并赋值： var <变量名> [变量类型] = <表达式></li>
-<li>简化的赋值： <变量名> := <表达式></li>
-<li>不存在隐式转换，必须显示声明</li>
+<li><p>声明格式： var <变量名> <变量类型></p></li>
+<li><p>变量赋值： <变量名> = <表达式></p></li>
+<li><p>声明并赋值： var <变量名> [变量类型] = <表达式></p></li>
+<li><p>简化的赋值： <变量名> := <表达式></p></li>
+<li><p>不存在隐式转换，必须显示声明</p>
+<p>#### 常量与变量名</p>
+<p>##### 常量</p>
+<ul>
+<li>关键字 ：const</li>
+<li>若右侧为函数则必须为内置函数</li>
+<li>必须为一个不被修改的值</li>
+<li>一般为全大写</li>
+<li>枚举
+<ul>
+<li>iota是常量及数据，从0开始，在每个const中从零开始递增1</li>
+<li>每定义一个常量iota就增加1</li>
+</ul></li>
+</ul></li>
+</ul>
+<h5 id="运算符">运算符</h5>
+<ul>
+<li><figure>
+<img src="assets/1553932192292.png" alt="1553932192292" /><figcaption>1553932192292</figcaption>
+</figure></li>
+<li><p><code>^</code>作为二元运算符是只相同位上，两个一个为<code>1</code>一个为<code>0</code>时结果为<code>1</code></p></li>
+<li><p><code>&amp;^</code>当第二个数的某一位为<code>1</code>时，将其对应位改成<code>0</code></p></li>
+<li><p>在golang中，<code>&amp;</code>和<code>|</code>仅进行位运算法，<code>&amp;&amp;</code>与<code>||</code>才可以进行逻辑判断</p></li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">const</span> (</a>
+<a class="sourceLine" id="cb2-2" title="2">   B = <span class="dv">1</span> &lt;&lt; (<span class="ot">iota</span> * <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb2-3" title="3">   KB</a>
+<a class="sourceLine" id="cb2-4" title="4">   MB</a>
+<a class="sourceLine" id="cb2-5" title="5">   GB</a>
+<a class="sourceLine" id="cb2-6" title="6">   TB</a>
+<a class="sourceLine" id="cb2-7" title="7">   PB</a>
+<a class="sourceLine" id="cb2-8" title="8">   EB</a>
+<a class="sourceLine" id="cb2-9" title="9">   ZB</a>
+<a class="sourceLine" id="cb2-10" title="10">   YB</a>
+<a class="sourceLine" id="cb2-11" title="11">)</a></code></pre></div>
+<ul>
+<li>指针
+<ul>
+<li>不可以进行指针的运算</li>
+<li><code>&amp;</code>为取址，<code>*</code>为访问指针对象</li>
+<li>默认值是<code>nul</code></li>
+</ul></li>
+<li><code>++</code>与<code>--</code>不是表达式而为语句，不可以作为表达式赋值给某一变量</li>
+</ul>
+<h4 id="控制语句">控制语句</h4>
+<h5 id="条件语句">条件语句</h5>
+<ul>
+<li><p>条件表达式没有括号</p></li>
+<li><p>支持初始化表达式</p>
+<ul>
+<li><div class="sourceCode" id="cb3"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">package</span> main</a>
+<a class="sourceLine" id="cb3-2" title="2"></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb3-6" title="6">   <span class="kw">if</span> a := <span class="dv">1</span>;a&gt;<span class="dv">0</span>{</a>
+<a class="sourceLine" id="cb3-7" title="7">      fmt.Print(<span class="st">&quot;ok&quot;</span>)</a>
+<a class="sourceLine" id="cb3-8" title="8">   }</a>
+<a class="sourceLine" id="cb3-9" title="9">}</a></code></pre></div></li>
+<li><p><code>if</code>或<code>else</code>连接的左大括号必须与<code>if</code>或<code>else</code>在同一行</p>
+<h5 id="循环语句">循环语句</h5>
+<ul>
+<li><p>只存在<code>for</code>为关键字的循环语句</p></li>
+<li><p>存在三种形式</p>
+<ul>
+<li><div class="sourceCode" id="cb4"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">package</span> main</a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb4-6" title="6">   a := <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-7" title="7">   <span class="kw">for</span> {</a>
+<a class="sourceLine" id="cb4-8" title="8">      a ++</a>
+<a class="sourceLine" id="cb4-9" title="9">      <span class="kw">if</span> a&gt;<span class="dv">5</span>{</a>
+<a class="sourceLine" id="cb4-10" title="10">         <span class="kw">break</span></a>
+<a class="sourceLine" id="cb4-11" title="11">      }</a>
+<a class="sourceLine" id="cb4-12" title="12">   }</a>
+<a class="sourceLine" id="cb4-13" title="13">   fmt.Print(a)</a>
+<a class="sourceLine" id="cb4-14" title="14">}</a></code></pre></div></li>
+<li>```go package main</li>
+</ul>
+<p>import “fmt”</p>
+<p>func main() { a := 1 for a &lt; 5 { a ++ } fmt.Print(a) } ```</p>
+<ul>
+<li><div class="sourceCode" id="cb5"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">package</span> main</a>
+<a class="sourceLine" id="cb5-2" title="2"></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="kw">import</span> <span class="st">&quot;fmt&quot;</span></a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb5-6" title="6">   a := <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-7" title="7">   <span class="kw">for</span> i := <span class="dv">0</span>;i&lt;<span class="dv">10</span>;i++ {</a>
+<a class="sourceLine" id="cb5-8" title="8">      a ++</a>
+<a class="sourceLine" id="cb5-9" title="9">   }</a>
+<a class="sourceLine" id="cb5-10" title="10">   fmt.Print(a)</a>
+<a class="sourceLine" id="cb5-11" title="11">}</a></code></pre></div></li>
+</ul></li>
+<li><p>左大括号需要与for在同一行</p></li>
+<li><p>不建议在条件语句中使用函数，如果是函数则会在每次循环时都执行一遍函数，拖慢速度</p></li>
+</ul></li>
+</ul></li>
+</ul>
+<h5 id="选择语句switch">选择语句(switch)</h5>
+<ul>
+<li><p>不需要写break，一旦找到符合的，直接跳出整个switch语句块。如果不希望跳出，使用<code>fallthrough</code>语句</p></li>
+<li><p>若条件为表达式，需要加分号</p></li>
+<li><p>代码示例</p>
+<ul>
+<li><div class="sourceCode" id="cb6"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb6-2" title="2">    a := <span class="dv">1</span></a>
+<a class="sourceLine" id="cb6-3" title="3">    <span class="kw">switch</span> a {</a>
+<a class="sourceLine" id="cb6-4" title="4">    <span class="kw">case</span> <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb6-5" title="5">        fmt.Print(<span class="st">&quot;0&quot;</span>)</a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="kw">case</span> <span class="dv">1</span>:</a>
+<a class="sourceLine" id="cb6-7" title="7">        fmt.Print(<span class="st">&quot;1&quot;</span>)</a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="kw">case</span> <span class="dv">2</span>:</a>
+<a class="sourceLine" id="cb6-9" title="9">        fmt.Print(<span class="st">&quot;2&quot;</span>)</a>
+<a class="sourceLine" id="cb6-10" title="10">    <span class="kw">default</span>:</a>
+<a class="sourceLine" id="cb6-11" title="11">        fmt.Print(<span class="st">&quot;can&#39;t find&quot;</span>)</a>
+<a class="sourceLine" id="cb6-12" title="12">    }</a>
+<a class="sourceLine" id="cb6-13" title="13">}</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb7"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb7-2" title="2">    a := <span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-3" title="3">    <span class="kw">switch</span>  {</a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="kw">case</span> a == <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb7-5" title="5">        fmt.Print(<span class="st">&quot;0&quot;</span>)</a>
+<a class="sourceLine" id="cb7-6" title="6">    <span class="kw">case</span> a == <span class="dv">1</span>:</a>
+<a class="sourceLine" id="cb7-7" title="7">        fmt.Print(<span class="st">&quot;1&quot;</span>)</a>
+<a class="sourceLine" id="cb7-8" title="8">    <span class="kw">case</span> a == <span class="dv">2</span>:</a>
+<a class="sourceLine" id="cb7-9" title="9">        fmt.Print(<span class="st">&quot;2&quot;</span>)</a>
+<a class="sourceLine" id="cb7-10" title="10">    <span class="kw">default</span>:</a>
+<a class="sourceLine" id="cb7-11" title="11">        fmt.Print(<span class="st">&quot;can&#39;t find&quot;</span>)</a>
+<a class="sourceLine" id="cb7-12" title="12">    }</a>
+<a class="sourceLine" id="cb7-13" title="13">}</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb8"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb8-2" title="2">    <span class="kw">switch</span>  a := <span class="dv">1</span>;{</a>
+<a class="sourceLine" id="cb8-3" title="3">    <span class="kw">case</span> a == <span class="dv">0</span>:</a>
+<a class="sourceLine" id="cb8-4" title="4">        fmt.Print(<span class="st">&quot;0&quot;</span>)</a>
+<a class="sourceLine" id="cb8-5" title="5">    <span class="kw">case</span> a == <span class="dv">1</span>:</a>
+<a class="sourceLine" id="cb8-6" title="6">        fmt.Print(<span class="st">&quot;1&quot;</span>)</a>
+<a class="sourceLine" id="cb8-7" title="7">    <span class="kw">case</span> a == <span class="dv">2</span>:</a>
+<a class="sourceLine" id="cb8-8" title="8">        fmt.Print(<span class="st">&quot;2&quot;</span>)</a>
+<a class="sourceLine" id="cb8-9" title="9">    <span class="kw">default</span>:</a>
+<a class="sourceLine" id="cb8-10" title="10">        fmt.Print(<span class="st">&quot;can&#39;t find&quot;</span>)</a>
+<a class="sourceLine" id="cb8-11" title="11">    }</a>
+<a class="sourceLine" id="cb8-12" title="12">}</a></code></pre></div></li>
+</ul></li>
+</ul>
+<h5 id="跳转语句">跳转语句</h5>
+<ul>
+<li><p><code>break</code>、<code>continue</code>、<code>goto</code>可以配合使用</p></li>
+<li><p>标签名区分大小写</p></li>
+<li><div class="sourceCode" id="cb9"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb9-2" title="2">    LABLE1:</a>
+<a class="sourceLine" id="cb9-3" title="3">    <span class="kw">for</span> {</a>
+<a class="sourceLine" id="cb9-4" title="4">        <span class="kw">for</span> i:= <span class="dv">0</span>; i &lt; <span class="dv">10</span>; i++{</a>
+<a class="sourceLine" id="cb9-5" title="5">            <span class="kw">if</span> i &gt; <span class="dv">3</span> {</a>
+<a class="sourceLine" id="cb9-6" title="6">                <span class="kw">break</span> LABLE1</a>
+<a class="sourceLine" id="cb9-7" title="7">            }</a>
+<a class="sourceLine" id="cb9-8" title="8">        }</a>
+<a class="sourceLine" id="cb9-9" title="9">    }</a>
+<a class="sourceLine" id="cb9-10" title="10">}</a></code></pre></div></li>
+<li><p>对于<code>break</code>、<code>continue</code>会跳转到这个循环结束</p></li>
+<li><p>对于<code>goto</code>会跳转到代码行所在位置</p></li>
+</ul>
+<h4 id="数组">数组</h4>
+<ul>
+<li><p>定义：var <变量名> [数组长度，也可以为空或<code>…]&lt;每一个元素的类型&gt; {初始化的值，用逗号隔开，或使用</code>索引:值`}</p></li>
+<li><p>长度为类型的一部分</p></li>
+<li><p>数据是值类型</p></li>
+<li><p>可以使用 <code>==</code> 以及 <code>!=</code> 但不可以进行大于或等于</p>
+<ul>
+<li>类型要相同才可以比较(长度数据类型的一部分)</li>
+</ul></li>
+<li><p><code>new</code>可以建立新的指向数组的指针</p></li>
+<li><div class="sourceCode" id="cb10"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb10-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb10-2" title="2">      a := [<span class="dv">10</span>]<span class="dt">int</span>{}</a>
+<a class="sourceLine" id="cb10-3" title="3">      a[<span class="dv">1</span>] = <span class="dv">2</span></a>
+<a class="sourceLine" id="cb10-4" title="4">      fmt.Print(a)</a>
+<a class="sourceLine" id="cb10-5" title="5">      p := <span class="bu">new</span>([<span class="dv">10</span>]<span class="dt">int</span>)</a>
+<a class="sourceLine" id="cb10-6" title="6">      p[<span class="dv">1</span>] = <span class="dv">2</span></a>
+<a class="sourceLine" id="cb10-7" title="7">      fmt.Print(p)</a>
+<a class="sourceLine" id="cb10-8" title="8">  }</a></code></pre></div></li>
+<li><p>多维数据</p>
+<ul>
+<li><div class="sourceCode" id="cb11"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb11-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb11-2" title="2">      a := [][]<span class="dt">int</span>{</a>
+<a class="sourceLine" id="cb11-3" title="3">          {<span class="dv">1</span>:<span class="dv">1</span>},</a>
+<a class="sourceLine" id="cb11-4" title="4">          {<span class="dv">2</span>:<span class="dv">1</span>},</a>
+<a class="sourceLine" id="cb11-5" title="5">      }</a>
+<a class="sourceLine" id="cb11-6" title="6">      fmt.Print(a)</a>
+<a class="sourceLine" id="cb11-7" title="7">  }</a></code></pre></div></li>
+</ul></li>
+<li><p>冒泡排序</p>
+<ul>
+<li><div class="sourceCode" id="cb12"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb12-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb12-2" title="2">      a := []<span class="dt">int</span>{<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">3</span>}</a>
+<a class="sourceLine" id="cb12-3" title="3">      a_len := <span class="bu">len</span>(a)</a>
+<a class="sourceLine" id="cb12-4" title="4">      <span class="kw">for</span> i := <span class="dv">0</span>;i &lt; a_len<span class="dv">-1</span>; i++{</a>
+<a class="sourceLine" id="cb12-5" title="5">          <span class="kw">for</span> j := <span class="dv">0</span>; j &lt; a_len<span class="dv">-1</span>; j++{</a>
+<a class="sourceLine" id="cb12-6" title="6">              <span class="kw">if</span> a[j] &gt; a[j+<span class="dv">1</span>]{</a>
+<a class="sourceLine" id="cb12-7" title="7">                  temp := a[j]</a>
+<a class="sourceLine" id="cb12-8" title="8">                  a[j] = a[j+<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb12-9" title="9">                  a[j+<span class="dv">1</span>] = temp</a>
+<a class="sourceLine" id="cb12-10" title="10">              }</a>
+<a class="sourceLine" id="cb12-11" title="11">          }</a>
+<a class="sourceLine" id="cb12-12" title="12">      }</a>
+<a class="sourceLine" id="cb12-13" title="13">      fmt.Print(a)</a>
+<a class="sourceLine" id="cb12-14" title="14">  }</a></code></pre></div></li>
+<li></li>
+</ul></li>
 </ul>
 <section class="footnotes" role="doc-endnotes">
 <hr />
