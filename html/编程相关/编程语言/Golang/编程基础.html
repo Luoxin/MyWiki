@@ -7,46 +7,49 @@
 <ul>
 <li>函数名首字母大写为public</li>
 <li>函数名首字母小写为private</li>
+</ul></li>
 </ul>
-<p>#### 一般的代码架构</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb1-1" title="1"><span class="co">// 当前程序的包名，需放在所有代码之前</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">package</span> main</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co">// 导入其它的包</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw">import</span> std <span class="st">&quot;fmt&quot;</span>  <span class="co">//std是重命名，类似于Python中的import fmt  as std</span></a>
-<a class="sourceLine" id="cb1-6" title="6"></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co">/*</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="co">import . &quot;fmt&quot; //省略调用，可以在程序中省略包名直接使用</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="co">*/</span></a>
-<a class="sourceLine" id="cb1-10" title="10"></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="co">/*</span></a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="co">import {</span></a>
-<a class="sourceLine" id="cb1-13" title="13"><span class="co">    &quot;fmt&quot;,</span></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="co">    &quot;os&quot;,</span></a>
-<a class="sourceLine" id="cb1-15" title="15"><span class="co">    &quot;time&quot;</span></a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="co">}</span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="co">*/</span></a>
-<a class="sourceLine" id="cb1-18" title="18"></a>
-<a class="sourceLine" id="cb1-19" title="19"><span class="co">// 常量的定义</span></a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="kw">const</span> PI = <span class="dv">3</span><span class="fl">.14</span></a>
-<a class="sourceLine" id="cb1-21" title="21"></a>
-<a class="sourceLine" id="cb1-22" title="22"><span class="co">// 全局变量的声明与赋值</span></a>
-<a class="sourceLine" id="cb1-23" title="23"><span class="kw">var</span> name = <span class="st">&quot;gopher&quot;</span></a>
-<a class="sourceLine" id="cb1-24" title="24"></a>
-<a class="sourceLine" id="cb1-25" title="25"><span class="co">// 一般类型声明</span></a>
-<a class="sourceLine" id="cb1-26" title="26"><span class="kw">type</span> newType <span class="dt">int</span></a>
-<a class="sourceLine" id="cb1-27" title="27"></a>
-<a class="sourceLine" id="cb1-28" title="28"><span class="co">// 结构的声明</span></a>
-<a class="sourceLine" id="cb1-29" title="29"><span class="kw">type</span> gopher <span class="kw">struct</span>{}</a>
-<a class="sourceLine" id="cb1-30" title="30"></a>
-<a class="sourceLine" id="cb1-31" title="31"><span class="co">// 接口的声明</span></a>
-<a class="sourceLine" id="cb1-32" title="32"><span class="kw">type</span> golang <span class="kw">interface</span>{}</a>
-<a class="sourceLine" id="cb1-33" title="33"></a>
-<a class="sourceLine" id="cb1-34" title="34"><span class="co">// 由 main 函数作为程序入口点启动</span></a>
-<a class="sourceLine" id="cb1-35" title="35"><span class="kw">func</span> main() {</a>
-<a class="sourceLine" id="cb1-36" title="36">    std.Println(<span class="st">&quot;Hello world!你好，世界！&quot;</span>)</a>
-<a class="sourceLine" id="cb1-37" title="37">}</a></code></pre></div></li>
-</ul>
+<h4 id="一般的代码架构">一般的代码架构</h4>
+<pre><code>```go
+// 当前程序的包名，需放在所有代码之前
+package main
+
+// 导入其它的包
+import std &quot;fmt&quot;  //std是重命名，类似于Python中的import fmt  as std
+
+/*
+import . &quot;fmt&quot; //省略调用，可以在程序中省略包名直接使用
+*/
+
+/*
+import {
+    &quot;fmt&quot;,
+    &quot;os&quot;,
+    &quot;time&quot;
+}
+*/
+
+// 常量的定义
+const PI = 3.14
+
+// 全局变量的声明与赋值
+var name = &quot;gopher&quot;
+
+// 一般类型声明
+type newType int
+
+// 结构的声明
+type gopher struct{}
+
+// 接口的声明
+type golang interface{}
+
+// 由 main 函数作为程序入口点启动
+func main() {
+    std.Println(&quot;Hello world!你好，世界！&quot;)
+}
+```</code></pre>
+<p>​</p>
 <h4 id="数据类型">数据类型</h4>
 <table>
 <thead>
@@ -144,9 +147,10 @@
 <li><p>变量赋值： <变量名> = <表达式></p></li>
 <li><p>声明并赋值： var <变量名> [变量类型] = <表达式></p></li>
 <li><p>简化的赋值： <变量名> := <表达式></p></li>
-<li><p>不存在隐式转换，必须显示声明</p>
-<p>#### 常量与变量名</p>
-<p>##### 常量</p>
+<li><p>不存在隐式转换，必须显示声明</p></li>
+</ul>
+<h4 id="常量与变量名">常量与变量名</h4>
+<h5 id="常量">常量</h5>
 <ul>
 <li>关键字 ：const</li>
 <li>若右侧为函数则必须为内置函数</li>
@@ -156,7 +160,6 @@
 <ul>
 <li>iota是常量及数据，从0开始，在每个const中从零开始递增1</li>
 <li>每定义一个常量iota就增加1</li>
-</ul></li>
 </ul></li>
 </ul>
 <h5 id="运算符">运算符</h5>
@@ -317,41 +320,437 @@
 <ul>
 <li>类型要相同才可以比较(长度数据类型的一部分)</li>
 </ul></li>
-<li><p><code>new</code>可以建立新的指向数组的指针</p></li>
-<li><div class="sourceCode" id="cb10"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb10-1" title="1">  <span class="kw">func</span> main()  {</a>
-<a class="sourceLine" id="cb10-2" title="2">      a := [<span class="dv">10</span>]<span class="dt">int</span>{}</a>
-<a class="sourceLine" id="cb10-3" title="3">      a[<span class="dv">1</span>] = <span class="dv">2</span></a>
-<a class="sourceLine" id="cb10-4" title="4">      fmt.Print(a)</a>
-<a class="sourceLine" id="cb10-5" title="5">      p := <span class="bu">new</span>([<span class="dv">10</span>]<span class="dt">int</span>)</a>
-<a class="sourceLine" id="cb10-6" title="6">      p[<span class="dv">1</span>] = <span class="dv">2</span></a>
-<a class="sourceLine" id="cb10-7" title="7">      fmt.Print(p)</a>
-<a class="sourceLine" id="cb10-8" title="8">  }</a></code></pre></div></li>
+<li><p>数据的截取与Python语法相同</p></li>
+<li><p><code>new</code>可以建立新的指向数组的指针</p>
+<ul>
+<li><div class="sourceCode" id="cb10"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb10-2" title="2">  a := [<span class="dv">10</span>]<span class="dt">int</span>{}</a>
+<a class="sourceLine" id="cb10-3" title="3">  a[<span class="dv">1</span>] = <span class="dv">2</span></a>
+<a class="sourceLine" id="cb10-4" title="4">  fmt.Print(a)</a>
+<a class="sourceLine" id="cb10-5" title="5">  p := <span class="bu">new</span>([<span class="dv">10</span>]<span class="dt">int</span>)</a>
+<a class="sourceLine" id="cb10-6" title="6">  p[<span class="dv">1</span>] = <span class="dv">2</span></a>
+<a class="sourceLine" id="cb10-7" title="7">  fmt.Print(p)</a>
+<a class="sourceLine" id="cb10-8" title="8">}</a></code></pre></div></li>
+</ul></li>
 <li><p>多维数据</p>
 <ul>
-<li><div class="sourceCode" id="cb11"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb11-1" title="1">  <span class="kw">func</span> main()  {</a>
-<a class="sourceLine" id="cb11-2" title="2">      a := [][]<span class="dt">int</span>{</a>
-<a class="sourceLine" id="cb11-3" title="3">          {<span class="dv">1</span>:<span class="dv">1</span>},</a>
-<a class="sourceLine" id="cb11-4" title="4">          {<span class="dv">2</span>:<span class="dv">1</span>},</a>
-<a class="sourceLine" id="cb11-5" title="5">      }</a>
-<a class="sourceLine" id="cb11-6" title="6">      fmt.Print(a)</a>
-<a class="sourceLine" id="cb11-7" title="7">  }</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb11"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb11-2" title="2">    a := [][]<span class="dt">int</span>{</a>
+<a class="sourceLine" id="cb11-3" title="3">        {<span class="dv">1</span>:<span class="dv">1</span>},</a>
+<a class="sourceLine" id="cb11-4" title="4">        {<span class="dv">2</span>:<span class="dv">1</span>},</a>
+<a class="sourceLine" id="cb11-5" title="5">    }</a>
+<a class="sourceLine" id="cb11-6" title="6">    fmt.Print(a)</a>
+<a class="sourceLine" id="cb11-7" title="7">}</a></code></pre></div></li>
 </ul></li>
 <li><p>冒泡排序</p>
 <ul>
-<li><div class="sourceCode" id="cb12"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb12-1" title="1">  <span class="kw">func</span> main()  {</a>
-<a class="sourceLine" id="cb12-2" title="2">      a := []<span class="dt">int</span>{<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">3</span>}</a>
-<a class="sourceLine" id="cb12-3" title="3">      a_len := <span class="bu">len</span>(a)</a>
-<a class="sourceLine" id="cb12-4" title="4">      <span class="kw">for</span> i := <span class="dv">0</span>;i &lt; a_len<span class="dv">-1</span>; i++{</a>
-<a class="sourceLine" id="cb12-5" title="5">          <span class="kw">for</span> j := <span class="dv">0</span>; j &lt; a_len<span class="dv">-1</span>; j++{</a>
-<a class="sourceLine" id="cb12-6" title="6">              <span class="kw">if</span> a[j] &gt; a[j+<span class="dv">1</span>]{</a>
-<a class="sourceLine" id="cb12-7" title="7">                  temp := a[j]</a>
-<a class="sourceLine" id="cb12-8" title="8">                  a[j] = a[j+<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb12-9" title="9">                  a[j+<span class="dv">1</span>] = temp</a>
-<a class="sourceLine" id="cb12-10" title="10">              }</a>
-<a class="sourceLine" id="cb12-11" title="11">          }</a>
-<a class="sourceLine" id="cb12-12" title="12">      }</a>
-<a class="sourceLine" id="cb12-13" title="13">      fmt.Print(a)</a>
-<a class="sourceLine" id="cb12-14" title="14">  }</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb12"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb12-2" title="2">    a := []<span class="dt">int</span>{<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">6</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">7</span>,<span class="dv">1</span>,<span class="dv">3</span>}</a>
+<a class="sourceLine" id="cb12-3" title="3">    a_len := <span class="bu">len</span>(a)</a>
+<a class="sourceLine" id="cb12-4" title="4">    <span class="kw">for</span> i := <span class="dv">0</span>;i &lt; a_len<span class="dv">-1</span>; i++{</a>
+<a class="sourceLine" id="cb12-5" title="5">        <span class="kw">for</span> j := <span class="dv">0</span>; j &lt; a_len<span class="dv">-1</span>; j++{</a>
+<a class="sourceLine" id="cb12-6" title="6">            <span class="kw">if</span> a[j] &gt; a[j+<span class="dv">1</span>]{</a>
+<a class="sourceLine" id="cb12-7" title="7">                temp := a[j]</a>
+<a class="sourceLine" id="cb12-8" title="8">                a[j] = a[j+<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb12-9" title="9">                a[j+<span class="dv">1</span>] = temp</a>
+<a class="sourceLine" id="cb12-10" title="10">            }</a>
+<a class="sourceLine" id="cb12-11" title="11">        }</a>
+<a class="sourceLine" id="cb12-12" title="12">    }</a>
+<a class="sourceLine" id="cb12-13" title="13">    fmt.Print(a)</a>
+<a class="sourceLine" id="cb12-14" title="14">}</a></code></pre></div></li>
+</ul></li>
+</ul>
+<h4 id="切片slice">切片slice</h4>
+<ul>
+<li><p>本身不是数组但是指向底层的数组</p></li>
+<li><p>作为边长数组的替代方案，可以关联底层数据的局部或全部</p></li>
+<li><p>应用类型</p></li>
+<li><p>可以直接创建或从底层数据获取生成</p></li>
+<li><p><code>len()</code>获取元素个数，<code>cap()</code>获取容量</p></li>
+<li><p>可使用mark创建</p></li>
+<li><p>多个slice指向同一个数组时，其中一个值改变会影响全部</p></li>
+<li><p>声明</p>
+<ul>
+<li>make([]T,len,cap)</li>
+<li>其中cap可以省略，默认值与len相同</li>
+</ul></li>
+<li><p>通过截取数组获得</p>
+<ul>
+<li><div class="sourceCode" id="cb13"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb13-2" title="2">    a := [<span class="dv">11</span>]<span class="dt">int</span>{}</a>
+<a class="sourceLine" id="cb13-3" title="3">    fmt.Println(a)</a>
+<a class="sourceLine" id="cb13-4" title="4">    b := a[:]</a>
+<a class="sourceLine" id="cb13-5" title="5">    fmt.Println(b)</a>
+<a class="sourceLine" id="cb13-6" title="6">}</a></code></pre></div></li>
+</ul></li>
+<li><p>Reslice</p>
+<ul>
+<li>以基准的slice切片为基准</li>
+<li>不可以超过slice切片的容量</li>
+<li>索引越界不会导致底层数组重新分配而是引发错误</li>
+</ul></li>
+<li><p>相关操作</p>
+<ul>
+<li><p>append</p>
+<ul>
+<li><p>可以在slice尾部追加元素</p></li>
+<li><p>可以将一个slice追加到另一个slice的尾部</p></li>
+<li><p>如果长度未超过追加后的容量则发挥原始的slice</p></li>
+<li><p>否则重新分类内存地址并返回新的slice</p></li>
+<li><p>用法：</p>
+<ul>
+<li><pre><code>  s1 = append(s1, 1, 2, 3, 4, 5) </code></pre></li>
+</ul></li>
+</ul></li>
+<li><p>copy</p>
+<ul>
+<li><div class="sourceCode" id="cb15"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb15-1" title="1"><span class="bu">copy</span>(s1, s2)<span class="co">//将s2拷贝到s1</span></a></code></pre></div></li>
+<li>长度以<code>s1</code>为基准，内容以<code>s2</code>为基准</li>
+</ul></li>
+<li><p>迭代循环</p>
+<ul>
+<li><div class="sourceCode" id="cb16"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb16-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb16-2" title="2">      a := [<span class="dv">11</span>]<span class="dt">int</span>{}</a>
+<a class="sourceLine" id="cb16-3" title="3">      fmt.Println(a)</a>
+<a class="sourceLine" id="cb16-4" title="4">      b := a[:]</a>
+<a class="sourceLine" id="cb16-5" title="5">      <span class="kw">for</span> i,v := <span class="kw">range</span> b{  <span class="co">// i为索引，v为该索引位置的值(拷贝)，直接对v修改不会改变slice的值</span></a>
+<a class="sourceLine" id="cb16-6" title="6">          fmt.Println(i,v)</a>
+<a class="sourceLine" id="cb16-7" title="7">      }</a>
+<a class="sourceLine" id="cb16-8" title="8">  }</a></code></pre></div></li>
+<li></li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="map">map</h4>
+<ul>
+<li><p>类似于哈希表或者字典，以key-value形式存储数据</p></li>
+<li><p>key不可以是函数、map或slice</p></li>
+<li><p>map查找比线性搜索快，但比索引访问数据慢100倍</p></li>
+<li><p>使用<code>make()</code>创建，支持<code>:=</code>的简写形式</p></li>
+<li><p>声明</p>
+<ul>
+<li>make([key的类型]value的类型, 容量)，cap代表容量，可以省略</li>
+<li>超出容量时会自动扩容</li>
+<li><code>len()</code>代表长度，<code>cap()</code>代表容量</li>
+</ul></li>
+<li><p>键值对不存在时自动添加，使用<code>delete(map，key)</code>删除某一键值对</p></li>
+<li><p>使用for range对map和slice进行迭代操作</p></li>
+<li><p>读写操作与Python相同</p></li>
+<li><p>map中嵌套map的例子</p>
+<ul>
+<li><div class="sourceCode" id="cb17"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb17-2" title="2">    m := <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">int</span>]<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">string</span>)</a>
+<a class="sourceLine" id="cb17-3" title="3">    m[<span class="dv">1</span>] = <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">string</span>)</a>
+<a class="sourceLine" id="cb17-4" title="4">    m[<span class="dv">1</span>][<span class="dv">1</span>] = <span class="st">&quot;10&quot;</span></a>
+<a class="sourceLine" id="cb17-5" title="5">    fmt.Print(m)</a>
+<a class="sourceLine" id="cb17-6" title="6">}</a></code></pre></div></li>
+<li><p>需要对每一级的map进行单独的初始化</p></li>
+<li><p>需要判断每一级的map是否已经被初始化了</p></li>
+</ul></li>
+<li><p>利用状态判断键值对是否被初始化了</p>
+<ul>
+<li><div class="sourceCode" id="cb18"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb18-2" title="2">    m := <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">int</span>]<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">string</span>)</a>
+<a class="sourceLine" id="cb18-3" title="3">    m[<span class="dv">1</span>] = <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">string</span>)</a>
+<a class="sourceLine" id="cb18-4" title="4">    a, status := m[<span class="dv">1</span>]  <span class="co">//第二个返回值代表了键值对是否存在</span></a>
+<a class="sourceLine" id="cb18-5" title="5">    fmt.Println(a,status)</a>
+<a class="sourceLine" id="cb18-6" title="6">}</a></code></pre></div></li>
+</ul></li>
+<li><p>迭代取值</p>
+<ul>
+<li><div class="sourceCode" id="cb19"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb19-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb19-2" title="2">      a := <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">int</span>)</a>
+<a class="sourceLine" id="cb19-3" title="3">      a[<span class="dv">1</span>] = <span class="dv">1</span></a>
+<a class="sourceLine" id="cb19-4" title="4">      a[<span class="dv">2</span>]=<span class="dv">2</span></a>
+<a class="sourceLine" id="cb19-5" title="5">      <span class="kw">for</span> k,v := <span class="kw">range</span> a{  <span class="co">// k,v为map中对应的键值对</span></a>
+<a class="sourceLine" id="cb19-6" title="6">          fmt.Println(k,v)</a>
+<a class="sourceLine" id="cb19-7" title="7">      }</a>
+<a class="sourceLine" id="cb19-8" title="8">  }</a></code></pre></div></li>
+<li><p>验证在slice中获得的值为拷贝的例子</p>
+<ul>
+<li><div class="sourceCode" id="cb20"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb20-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb20-2" title="2">      s := <span class="bu">make</span>([]<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">int</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb20-3" title="3">      <span class="kw">for</span> _, v := <span class="kw">range</span> s{</a>
+<a class="sourceLine" id="cb20-4" title="4">          v = <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">int</span>)</a>
+<a class="sourceLine" id="cb20-5" title="5">          v[<span class="dv">1</span>] = <span class="dv">1</span></a>
+<a class="sourceLine" id="cb20-6" title="6">      }</a>
+<a class="sourceLine" id="cb20-7" title="7">      fmt.Println(s)</a>
+<a class="sourceLine" id="cb20-8" title="8"></a>
+<a class="sourceLine" id="cb20-9" title="9">      <span class="kw">for</span> i, _ := <span class="kw">range</span> s{</a>
+<a class="sourceLine" id="cb20-10" title="10">          s[i] = <span class="bu">make</span>(<span class="kw">map</span>[<span class="dt">int</span>]<span class="dt">int</span>)</a>
+<a class="sourceLine" id="cb20-11" title="11">          s[i][<span class="dv">1</span>] = <span class="dv">1</span></a>
+<a class="sourceLine" id="cb20-12" title="12">      }</a>
+<a class="sourceLine" id="cb20-13" title="13">      fmt.Println(s)</a>
+<a class="sourceLine" id="cb20-14" title="14">  }</a></code></pre></div></li>
+</ul></li>
+</ul></li>
+</ul>
+<h4 id="函数function">函数function</h4>
+<ul>
+<li><p>不支持嵌套、重载和默认参数</p></li>
+<li><p>支持特性</p>
+<ul>
+<li>无需声明原型</li>
+<li>不定长度变参</li>
+<li>多返回值</li>
+<li>命名返回值参数</li>
+<li>匿名函数(不可以作为外层函数)</li>
+<li>闭包</li>
+</ul></li>
+<li><p><code>func</code>，左大括号要在同一行</p></li>
+<li><p>函数可以作为类型使用</p></li>
+<li><p>一些实例</p>
+<ul>
+<li><div class="sourceCode" id="cb21"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">func</span> test(a,b,c <span class="dt">int</span>)  (d,e,f <span class="dt">int</span>){}</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb22"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">func</span> test() (<span class="dt">int</span>, <span class="dt">int</span>, <span class="dt">int</span>){}</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb23"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">func</span> test(a ...<span class="dt">int</span>)  {</a>
+<a class="sourceLine" id="cb23-2" title="2">    <span class="co">/*</span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="co">    不定长参数的传递：</span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">        - 不定参参数只能卸载参数列表是最后一个</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="co">        - 传入的a为slice类型</span></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="co">        - 传入是只是拷贝，修改值并不会以影响原始的变量的值</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="co">    */</span></a>
+<a class="sourceLine" id="cb23-8" title="8">    fmt.Println(a)</a>
+<a class="sourceLine" id="cb23-9" title="9">}</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb24"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">func</span> test(s []<span class="dt">int</span>)  {</a>
+<a class="sourceLine" id="cb24-2" title="2">    <span class="co">/*</span></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="co">    传入的参数为slice形式的时候</span></a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="co">        - 对其值改变会导致原始值的改变</span></a>
+<a class="sourceLine" id="cb24-5" title="5"><span class="co">        - 传入的仍是拷贝，但由于slice是引用类型，所以拷贝进来的还是内存地址</span></a>
+<a class="sourceLine" id="cb24-6" title="6"><span class="co">    */</span></a>
+<a class="sourceLine" id="cb24-7" title="7">}</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb25"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb25-1" title="1"><span class="co">/*</span></a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="co">利用指针在函数中对原始值进行操作</span></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="co">*/</span></a>
+<a class="sourceLine" id="cb25-4" title="4"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb25-5" title="5">    s1 := <span class="dv">1</span></a>
+<a class="sourceLine" id="cb25-6" title="6">    test(&amp;s1)</a>
+<a class="sourceLine" id="cb25-7" title="7">    fmt.Println(s1)</a>
+<a class="sourceLine" id="cb25-8" title="8">}</a>
+<a class="sourceLine" id="cb25-9" title="9"></a>
+<a class="sourceLine" id="cb25-10" title="10"><span class="kw">func</span> test(s *<span class="dt">int</span>)  {</a>
+<a class="sourceLine" id="cb25-11" title="11">    *s++</a>
+<a class="sourceLine" id="cb25-12" title="12">    fmt.Println(*s)</a>
+<a class="sourceLine" id="cb25-13" title="13">}</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb26"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb26-2" title="2">    a := <span class="kw">func</span>() {fmt.Println(<span class="st">&quot;匿名函数&quot;</span>)}</a>
+<a class="sourceLine" id="cb26-3" title="3">    a()</a>
+<a class="sourceLine" id="cb26-4" title="4">}</a></code></pre></div></li>
+<li><pre><code>
+//闭包
+func main()  {
+    f := closure(10)  // 此时f为一个函数，传入值为y，返回值为10+y
+    fmt.Println(f(1))
+}
+
+func closure(x int)  func(int) int{
+    return func(y int) int {
+        return x + y
+    }
+}</code></pre></li>
+</ul></li>
+<li><p>defer</p>
+<ul>
+<li><p>执行方式类似于析构函数，在函数体执行结束后按照调用的相反顺序逐个执行</p></li>
+<li><p>即使函数发生<strong>严重错误</strong>也会执行</p></li>
+<li><p>支持匿名函数的调用</p></li>
+<li><p>常用语资源清理，文件关闭、解锁以及记录时间等操作</p></li>
+<li><p>通过与匿名函数的配合在return后修改函数计算结果</p></li>
+<li><p>如果函数体内某个变量作为defer时匿名函数的参数，则在定义defer时已经获得了拷贝，否则则是引用某个变量地址</p></li>
+<li><p>代码样例</p>
+<ul>
+<li><div class="sourceCode" id="cb28"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb28-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb28-2" title="2">      <span class="co">/*</span></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="co">      - 输出结果为132</span></a>
+<a class="sourceLine" id="cb28-4" title="4"><span class="co">      - defer在程序执行结束后执行</span></a>
+<a class="sourceLine" id="cb28-5" title="5"><span class="co">      - defer逆序往上调用</span></a>
+<a class="sourceLine" id="cb28-6" title="6"><span class="co">       */</span></a>
+<a class="sourceLine" id="cb28-7" title="7">      fmt.Printf(<span class="st">&quot;1&quot;</span>)</a>
+<a class="sourceLine" id="cb28-8" title="8">      <span class="kw">defer</span> fmt.Printf(<span class="st">&quot;2&quot;</span>)</a>
+<a class="sourceLine" id="cb28-9" title="9">      <span class="kw">defer</span> fmt.Printf(<span class="st">&quot;3&quot;</span>)</a>
+<a class="sourceLine" id="cb28-10" title="10">  }</a></code></pre></div></li>
+<li></li>
+</ul></li>
+</ul></li>
+<li><p>没有异常机制，可以通过panic/recover来处理错误</p></li>
+<li><p>panic可以在任何地方引发，但recover只有在defer调用的函数中有效</p></li>
+<li><div class="sourceCode" id="cb29"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb29-2" title="2">  a()</a>
+<a class="sourceLine" id="cb29-3" title="3">  b()</a>
+<a class="sourceLine" id="cb29-4" title="4">  c()</a>
+<a class="sourceLine" id="cb29-5" title="5">}</a>
+<a class="sourceLine" id="cb29-6" title="6"></a>
+<a class="sourceLine" id="cb29-7" title="7"><span class="kw">func</span> a(){</a>
+<a class="sourceLine" id="cb29-8" title="8">  fmt.Println(<span class="st">&quot;a&quot;</span>)</a>
+<a class="sourceLine" id="cb29-9" title="9">}</a>
+<a class="sourceLine" id="cb29-10" title="10"></a>
+<a class="sourceLine" id="cb29-11" title="11"><span class="kw">func</span> b()  {</a>
+<a class="sourceLine" id="cb29-12" title="12">  <span class="kw">defer</span> <span class="kw">func</span>() {  <span class="co">//defer需要放在panic之前</span></a>
+<a class="sourceLine" id="cb29-13" title="13">      <span class="kw">if</span> err := <span class="bu">recover</span>(); err != <span class="ot">nil</span>{</a>
+<a class="sourceLine" id="cb29-14" title="14">          fmt.Println(<span class="st">&quot;Recover b&quot;</span>)</a>
+<a class="sourceLine" id="cb29-15" title="15">      }</a>
+<a class="sourceLine" id="cb29-16" title="16">  }()</a>
+<a class="sourceLine" id="cb29-17" title="17"></a>
+<a class="sourceLine" id="cb29-18" title="18">  <span class="bu">panic</span>(<span class="st">&quot;b&quot;</span>)  <span class="co">//此处会引发异常</span></a>
+<a class="sourceLine" id="cb29-19" title="19">}</a>
+<a class="sourceLine" id="cb29-20" title="20"></a>
+<a class="sourceLine" id="cb29-21" title="21"><span class="kw">func</span> c()  {</a>
+<a class="sourceLine" id="cb29-22" title="22">  fmt.Println(<span class="st">&quot;c&quot;</span>)</a>
+<a class="sourceLine" id="cb29-23" title="23">}</a></code></pre></div></li>
+</ul>
+<h4 id="结构-struct">结构 struct</h4>
+<ul>
+<li><p>go没有class</p></li>
+<li><p>使用type<name> struct{}定义结构</p></li>
+<li><p>支持指向自身的指针类型成员</p></li>
+<li><p>支持匿名结构，可做成员或定于成员变量</p></li>
+<li><p>匿名结构也可以作为map的值</p></li>
+<li><p>可以使用字面值对结构初始化</p></li>
+<li><p>允许通过指针来读写结构成员</p></li>
+<li><p>相同类型的成员可以进行直接拷贝赋值</p></li>
+<li><p>支持 <code>==</code>与<code>!=</code>比较运算符当不支持大于或小于</p></li>
+<li><p>支持匿名字段，本质上是定义了以某个类型名为名称的字段</p></li>
+<li><p>可以使用匿名字段指针</p></li>
+<li><p>建议在初始化的时候使用<code>&amp;</code>直接获取地址</p></li>
+<li><p>是值类型</p></li>
+<li><p>一些代码示例</p>
+<ul>
+<li><div class="sourceCode" id="cb30"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">type</span> persion <span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb30-2" title="2">    name <span class="dt">string</span></a>
+<a class="sourceLine" id="cb30-3" title="3">    age  <span class="dt">int</span></a>
+<a class="sourceLine" id="cb30-4" title="4">}</a>
+<a class="sourceLine" id="cb30-5" title="5"></a>
+<a class="sourceLine" id="cb30-6" title="6"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb30-7" title="7">    a := persion{</a>
+<a class="sourceLine" id="cb30-8" title="8">        name:<span class="st">&quot;name&quot;</span>,</a>
+<a class="sourceLine" id="cb30-9" title="9">        age: <span class="dv">18</span>,</a>
+<a class="sourceLine" id="cb30-10" title="10">    }</a>
+<a class="sourceLine" id="cb30-11" title="11">    b := persion{</a>
+<a class="sourceLine" id="cb30-12" title="12">        <span class="st">&quot;name&quot;</span>,</a>
+<a class="sourceLine" id="cb30-13" title="13">        <span class="dv">18</span>,</a>
+<a class="sourceLine" id="cb30-14" title="14">    }</a>
+<a class="sourceLine" id="cb30-15" title="15">    fmt.Println(a)</a>
+<a class="sourceLine" id="cb30-16" title="16">    fmt.Println(a==b)</a>
+<a class="sourceLine" id="cb30-17" title="17">}</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb31"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">type</span> human <span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb31-2" title="2">    Sex <span class="dt">int</span></a>
+<a class="sourceLine" id="cb31-3" title="3">}</a>
+<a class="sourceLine" id="cb31-4" title="4"></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="kw">type</span> teacher <span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb31-6" title="6">    human</a>
+<a class="sourceLine" id="cb31-7" title="7">    Name <span class="dt">string</span></a>
+<a class="sourceLine" id="cb31-8" title="8">    Age  <span class="dt">int</span></a>
+<a class="sourceLine" id="cb31-9" title="9">}</a>
+<a class="sourceLine" id="cb31-10" title="10"></a>
+<a class="sourceLine" id="cb31-11" title="11"><span class="kw">type</span> student <span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb31-12" title="12">    human</a>
+<a class="sourceLine" id="cb31-13" title="13">    Name <span class="dt">string</span></a>
+<a class="sourceLine" id="cb31-14" title="14">    Age  <span class="dt">int</span></a>
+<a class="sourceLine" id="cb31-15" title="15">}</a>
+<a class="sourceLine" id="cb31-16" title="16"></a>
+<a class="sourceLine" id="cb31-17" title="17"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb31-18" title="18">    b := human{Sex:<span class="dv">1</span>}</a>
+<a class="sourceLine" id="cb31-19" title="19">    a := student{Name:<span class="st">&quot;name&quot;</span>, human: human{Sex:<span class="dv">1</span>}}  <span class="co">//匿名结构默认结构名为变量名</span></a>
+<a class="sourceLine" id="cb31-20" title="20">    a.Sex = <span class="dv">19</span> <span class="co">// 嵌入结构可以直接当做本身的属性来修改值   </span></a>
+<a class="sourceLine" id="cb31-21" title="21">    fmt.Println(a, b)</a>
+<a class="sourceLine" id="cb31-22" title="22">}</a></code></pre></div></li>
+</ul></li>
+<li><p>嵌入结构的重名可以按照一个变量来操作 #### 方法method</p></li>
+<li><p>通过显示说明receiver来实现与某个类型的组合</p></li>
+<li><p>只能为同一个包中的类型定义方法</p></li>
+<li><p>receiver可以是类型的值或指针</p></li>
+<li><p>不存在方法重载</p></li>
+<li><p>可以使用值或指针来调用方法</p></li>
+<li><p>从某种意义上来说，方法是函数的语法糖，因为receiver其实就是方法所接收的第一个参数</p></li>
+<li><p>如果外部结构和嵌入结构存在同方法名，这邮箱调用外部的结构方法</p></li>
+<li><p>类型别名不会拥有底层类型所附带的方法</p></li>
+<li><p>方法可以调用结构中的非公开字段</p></li>
+<li><p>代码示例</p>
+<ul>
+<li><div class="sourceCode" id="cb32"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">type</span> A <span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb32-2" title="2">    Name <span class="dt">int</span></a>
+<a class="sourceLine" id="cb32-3" title="3">}</a>
+<a class="sourceLine" id="cb32-4" title="4"></a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb32-6" title="6">    a := A{}</a>
+<a class="sourceLine" id="cb32-7" title="7">    a.Print()</a>
+<a class="sourceLine" id="cb32-8" title="8">    fmt.Println(a.Name)</a>
+<a class="sourceLine" id="cb32-9" title="9">}</a>
+<a class="sourceLine" id="cb32-10" title="10"></a>
+<a class="sourceLine" id="cb32-11" title="11"><span class="kw">func</span> (a *A) Print()  {  <span class="co">// 将a与结构A绑定   如果是指针类型的会直接修改a的值</span></a>
+<a class="sourceLine" id="cb32-12" title="12">    a.Name = <span class="dv">10</span></a>
+<a class="sourceLine" id="cb32-13" title="13">    fmt.Println(*a)</a>
+<a class="sourceLine" id="cb32-14" title="14">}</a></code></pre></div></li>
+</ul></li>
+</ul>
+<h4 id="接口interface">接口interface</h4>
+<ul>
+<li><p>接口是一个或多个方案签名的结合</p></li>
+<li><p>只要某个类型拥有改接口的所有方法签名，即算实现该接口，无需显示声明实现了哪个接口，这被称为Structural Typing</p></li>
+<li><p>接口只有方法声明，没有实现，没有数据字段</p></li>
+<li><p>接口可以匿名嵌入其他接口或嵌入结构中</p></li>
+<li><p>将对象赋值给接口时，会发生拷贝，而接口内部存储的是指向这个复制品的指针，既无法修改复制品的状态，也无法获取指针</p></li>
+<li><p>只有当接口存储的类型和对象都为nil值，接口才等于nil</p></li>
+<li><p>接口调用不会做receiver的自动转换</p></li>
+<li><p>接口同样支持匿名字段的方法</p></li>
+<li><p>接口也可实现类似OPP中的多态</p></li>
+<li><p>空接口可以作为任何类型数据的容器</p></li>
+<li><p>一些实例</p>
+<ul>
+<li><div class="sourceCode" id="cb33"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb33-1" title="1">  <span class="co">//接口的实现</span></a>
+<a class="sourceLine" id="cb33-2" title="2">  <span class="kw">type</span> USB <span class="kw">interface</span> {</a>
+<a class="sourceLine" id="cb33-3" title="3">      Name() <span class="dt">string</span></a>
+<a class="sourceLine" id="cb33-4" title="4">      Connect()</a>
+<a class="sourceLine" id="cb33-5" title="5">  }</a>
+<a class="sourceLine" id="cb33-6" title="6"></a>
+<a class="sourceLine" id="cb33-7" title="7">  <span class="kw">type</span> PC <span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb33-8" title="8">      name <span class="dt">string</span></a>
+<a class="sourceLine" id="cb33-9" title="9">  }</a>
+<a class="sourceLine" id="cb33-10" title="10"></a>
+<a class="sourceLine" id="cb33-11" title="11">  <span class="kw">func</span> (pc PC)Name()  <span class="dt">string</span>{</a>
+<a class="sourceLine" id="cb33-12" title="12">      <span class="kw">return</span> pc.name</a>
+<a class="sourceLine" id="cb33-13" title="13">  }</a>
+<a class="sourceLine" id="cb33-14" title="14"></a>
+<a class="sourceLine" id="cb33-15" title="15">  <span class="kw">func</span> (pc PC)Connect()  {</a>
+<a class="sourceLine" id="cb33-16" title="16">      fmt.Println(pc.name)</a>
+<a class="sourceLine" id="cb33-17" title="17">  }</a>
+<a class="sourceLine" id="cb33-18" title="18"></a>
+<a class="sourceLine" id="cb33-19" title="19">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb33-20" title="20">      <span class="kw">var</span> a USB</a>
+<a class="sourceLine" id="cb33-21" title="21">      a = PC{<span class="st">&quot;pcpcpcpc&quot;</span>}</a>
+<a class="sourceLine" id="cb33-22" title="22">      a.Connect()</a>
+<a class="sourceLine" id="cb33-23" title="23">      fmt.Println(a.Name())</a>
+<a class="sourceLine" id="cb33-24" title="24">  }</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb34"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb34-1" title="1">  <span class="kw">type</span> USB <span class="kw">interface</span> {</a>
+<a class="sourceLine" id="cb34-2" title="2">      Name() <span class="dt">string</span></a>
+<a class="sourceLine" id="cb34-3" title="3">      Connect()</a>
+<a class="sourceLine" id="cb34-4" title="4">  }</a>
+<a class="sourceLine" id="cb34-5" title="5"></a>
+<a class="sourceLine" id="cb34-6" title="6">  <span class="kw">type</span> PC <span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb34-7" title="7">      name <span class="dt">string</span></a>
+<a class="sourceLine" id="cb34-8" title="8">  }</a>
+<a class="sourceLine" id="cb34-9" title="9"></a>
+<a class="sourceLine" id="cb34-10" title="10">  <span class="kw">func</span> (pc PC)Name()  <span class="dt">string</span>{</a>
+<a class="sourceLine" id="cb34-11" title="11">      <span class="kw">return</span> pc.name</a>
+<a class="sourceLine" id="cb34-12" title="12">  }</a>
+<a class="sourceLine" id="cb34-13" title="13"></a>
+<a class="sourceLine" id="cb34-14" title="14">  <span class="kw">func</span> (pc PC)Connect()  {</a>
+<a class="sourceLine" id="cb34-15" title="15">      fmt.Println(pc.name)</a>
+<a class="sourceLine" id="cb34-16" title="16">  }</a>
+<a class="sourceLine" id="cb34-17" title="17"></a>
+<a class="sourceLine" id="cb34-18" title="18">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb34-19" title="19">      <span class="kw">var</span> a USB</a>
+<a class="sourceLine" id="cb34-20" title="20">      a = PC{<span class="st">&quot;pcpcpcpc&quot;</span>}</a>
+<a class="sourceLine" id="cb34-21" title="21">      a.Connect()</a>
+<a class="sourceLine" id="cb34-22" title="22">      fmt.Println(a.Name())</a>
+<a class="sourceLine" id="cb34-23" title="23">      disconnect(a)</a>
+<a class="sourceLine" id="cb34-24" title="24">  }</a>
+<a class="sourceLine" id="cb34-25" title="25"></a>
+<a class="sourceLine" id="cb34-26" title="26">  <span class="kw">func</span> disconnect(usb <span class="kw">interface</span>{})  {</a>
+<a class="sourceLine" id="cb34-27" title="27">      <span class="kw">if</span> pc, ok := usb.(PC);ok{</a>
+<a class="sourceLine" id="cb34-28" title="28">          fmt.Println(pc.name)</a>
+<a class="sourceLine" id="cb34-29" title="29">      }</a>
+<a class="sourceLine" id="cb34-30" title="30">  }</a></code></pre></div></li>
 <li></li>
 </ul></li>
 </ul>
