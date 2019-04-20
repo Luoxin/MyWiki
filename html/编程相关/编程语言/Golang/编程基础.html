@@ -751,7 +751,226 @@ func closure(x int)  func(int) int{
 <a class="sourceLine" id="cb34-28" title="28">          fmt.Println(pc.name)</a>
 <a class="sourceLine" id="cb34-29" title="29">      }</a>
 <a class="sourceLine" id="cb34-30" title="30">  }</a></code></pre></div></li>
+</ul></li>
+<li><p>==type switch== #### 反射reflection</p></li>
+<li><p>反射可以提高灵活性，使得<code>interface()</code>有更大的发挥余地</p></li>
+<li><p>反射使用TypeOf和ValueOf函数从接口中获取目标信息</p></li>
+<li><p>反射会将匿名字段作为独立字段</p></li>
+<li><p>想要利用反射修改对象状态的前提是<code>interface.data</code>是settable，即pointer-interface</p></li>
+<li><p>通过反射可以“动态”调用方法</p></li>
+<li><p>一些实例</p>
+<ul>
+<li><div class="sourceCode" id="cb35"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb35-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb35-2" title="2">      x := <span class="dv">123</span></a>
+<a class="sourceLine" id="cb35-3" title="3">      v := reflect.ValueOf(&amp;x)</a>
+<a class="sourceLine" id="cb35-4" title="4">      v.Elem().SetInt(<span class="dv">999</span>)  <span class="co">//通过elem来获取的value值</span></a>
+<a class="sourceLine" id="cb35-5" title="5">      fmt.Print(x)</a>
+<a class="sourceLine" id="cb35-6" title="6">  }</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb36"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb36-1" title="1">  <span class="kw">type</span> User <span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb36-2" title="2">      Id,Age <span class="dt">int</span></a>
+<a class="sourceLine" id="cb36-3" title="3">      Name <span class="dt">string</span></a>
+<a class="sourceLine" id="cb36-4" title="4">  }</a>
+<a class="sourceLine" id="cb36-5" title="5"></a>
+<a class="sourceLine" id="cb36-6" title="6">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb36-7" title="7">      u := User{<span class="dv">1</span>,<span class="dv">2</span>, <span class="st">&quot;HHHHH&quot;</span>}</a>
+<a class="sourceLine" id="cb36-8" title="8">      Set(&amp;u)</a>
+<a class="sourceLine" id="cb36-9" title="9">      fmt.Print(u)</a>
+<a class="sourceLine" id="cb36-10" title="10">  }</a>
+<a class="sourceLine" id="cb36-11" title="11"></a>
+<a class="sourceLine" id="cb36-12" title="12">  <span class="kw">func</span> Set(o <span class="kw">interface</span>{})  {</a>
+<a class="sourceLine" id="cb36-13" title="13">      v := reflect.ValueOf(o)</a>
+<a class="sourceLine" id="cb36-14" title="14"></a>
+<a class="sourceLine" id="cb36-15" title="15">      <span class="kw">if</span> v.Kind()  == reflect.Ptr &amp;&amp; !v.Elem().CanSet(){</a>
+<a class="sourceLine" id="cb36-16" title="16">          fmt.Println(<span class="st">&quot;不可以被修改&quot;</span>)</a>
+<a class="sourceLine" id="cb36-17" title="17">          <span class="kw">return</span></a>
+<a class="sourceLine" id="cb36-18" title="18">      }<span class="kw">else</span> {</a>
+<a class="sourceLine" id="cb36-19" title="19">          v = v.Elem()</a>
+<a class="sourceLine" id="cb36-20" title="20">      }</a>
+<a class="sourceLine" id="cb36-21" title="21"></a>
+<a class="sourceLine" id="cb36-22" title="22">      f := v.FieldByName(<span class="st">&quot;Name&quot;</span>)</a>
+<a class="sourceLine" id="cb36-23" title="23">      <span class="kw">if</span> !f.IsValid(){</a>
+<a class="sourceLine" id="cb36-24" title="24">          fmt.Println(<span class="st">&quot;未找到&quot;</span>)</a>
+<a class="sourceLine" id="cb36-25" title="25">          <span class="kw">return</span></a>
+<a class="sourceLine" id="cb36-26" title="26">      }</a>
+<a class="sourceLine" id="cb36-27" title="27"></a>
+<a class="sourceLine" id="cb36-28" title="28">      <span class="kw">if</span> f.Kind() == reflect.String{</a>
+<a class="sourceLine" id="cb36-29" title="29">          f.SetString(<span class="st">&quot;BYBYBY&quot;</span>)</a>
+<a class="sourceLine" id="cb36-30" title="30">      }</a>
+<a class="sourceLine" id="cb36-31" title="31"></a>
+<a class="sourceLine" id="cb36-32" title="32">      <span class="co">//if f := v.FieldByName(&quot;Name&quot;); f.Kind() == reflect.String{</span></a>
+<a class="sourceLine" id="cb36-33" title="33">      <span class="co">//  f.SetString(&quot;BYBYBY&quot;)</span></a>
+<a class="sourceLine" id="cb36-34" title="34">      <span class="co">//}</span></a>
+<a class="sourceLine" id="cb36-35" title="35">  } </a></code></pre></div></li>
+<li><div class="sourceCode" id="cb37"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb37-1" title="1">  <span class="kw">type</span> User <span class="kw">struct</span> {</a>
+<a class="sourceLine" id="cb37-2" title="2">      Id,Age <span class="dt">int</span></a>
+<a class="sourceLine" id="cb37-3" title="3">      Name <span class="dt">string</span></a>
+<a class="sourceLine" id="cb37-4" title="4">  }</a>
+<a class="sourceLine" id="cb37-5" title="5"></a>
+<a class="sourceLine" id="cb37-6" title="6">  <span class="kw">func</span> (u User)Hello(name <span class="dt">string</span>)  {</a>
+<a class="sourceLine" id="cb37-7" title="7">      fmt.Println(name, u.Name)</a>
+<a class="sourceLine" id="cb37-8" title="8">  }</a>
+<a class="sourceLine" id="cb37-9" title="9"></a>
+<a class="sourceLine" id="cb37-10" title="10">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb37-11" title="11">      u := User{<span class="dv">1</span>,<span class="dv">2</span>, <span class="st">&quot;OK&quot;</span>}</a>
+<a class="sourceLine" id="cb37-12" title="12">      u.Hello(<span class="st">&quot;Joe&quot;</span>)</a>
+<a class="sourceLine" id="cb37-13" title="13"></a>
+<a class="sourceLine" id="cb37-14" title="14">      v := reflect.ValueOf(u)</a>
+<a class="sourceLine" id="cb37-15" title="15">      mv := v.MethodByName(<span class="st">&quot;Hello&quot;</span>)</a>
+<a class="sourceLine" id="cb37-16" title="16"></a>
+<a class="sourceLine" id="cb37-17" title="17">      args := []reflect.Value{reflect.ValueOf(<span class="st">&quot;Joe&quot;</span>)}</a>
+<a class="sourceLine" id="cb37-18" title="18">      mv.Call(args)</a>
+<a class="sourceLine" id="cb37-19" title="19"></a>
+<a class="sourceLine" id="cb37-20" title="20">  }</a></code></pre></div></li>
+</ul></li>
+</ul>
+<h4 id="并发concurrency">并发concurrency</h4>
+<ul>
+<li><p>最简单的实例</p>
+<ul>
+<li><div class="sourceCode" id="cb38"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb38-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb38-2" title="2">      <span class="kw">go</span> Go()</a>
+<a class="sourceLine" id="cb38-3" title="3">      time.Sleep(time.Second) <span class="co">// 使用常量避免单位导致的错误</span></a>
+<a class="sourceLine" id="cb38-4" title="4">  }</a>
+<a class="sourceLine" id="cb38-5" title="5"></a>
+<a class="sourceLine" id="cb38-6" title="6">  <span class="kw">func</span> Go()  {</a>
+<a class="sourceLine" id="cb38-7" title="7">      fmt.Println(<span class="st">&quot;gogogo&quot;</span>)</a>
+<a class="sourceLine" id="cb38-8" title="8">  }</a></code></pre></div></li>
+<li><p>goroutine奉行通过通信来共享内存而不是共享内存来通信</p></li>
+<li><p>channel</p>
+<ul>
+<li><p>是goroutine沟通的桥梁，大都是阻塞同步的</p></li>
+<li><p>通过make创建，close关闭</p></li>
+<li><p>可以使用for range来迭代不断的操作channel</p></li>
+<li><p>可以设置单向或双向通道</p></li>
+<li><p>可以设置缓存大小，在未被填满前不会发生阻塞</p>
+<ul>
+<li>有缓存是异步的，无缓存是同步的</li>
+</ul></li>
+<li><p>一些实例</p>
+<ul>
+<li><div class="sourceCode" id="cb39"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb39-1" title="1">  <span class="kw">func</span> main()  {<span class="co">// channel的基础操作</span></a>
+<a class="sourceLine" id="cb39-2" title="2">      c := <span class="bu">make</span>(<span class="kw">chan</span> <span class="dt">bool</span>)</a>
+<a class="sourceLine" id="cb39-3" title="3">      <span class="kw">go</span> <span class="kw">func</span>(){</a>
+<a class="sourceLine" id="cb39-4" title="4">          fmt.Println(<span class="st">&quot;gogogo&quot;</span>)</a>
+<a class="sourceLine" id="cb39-5" title="5">          c &lt;- <span class="ot">true</span></a>
+<a class="sourceLine" id="cb39-6" title="6">      }()</a>
+<a class="sourceLine" id="cb39-7" title="7">      &lt;-c</a>
+<a class="sourceLine" id="cb39-8" title="8">  }</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb40"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb40-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb40-2" title="2">      c := <span class="bu">make</span>(<span class="kw">chan</span> <span class="dt">bool</span>)</a>
+<a class="sourceLine" id="cb40-3" title="3">      <span class="kw">go</span> <span class="kw">func</span>(){</a>
+<a class="sourceLine" id="cb40-4" title="4">          fmt.Println(<span class="st">&quot;gogogo&quot;</span>)</a>
+<a class="sourceLine" id="cb40-5" title="5">          c &lt;- <span class="ot">true</span></a>
+<a class="sourceLine" id="cb40-6" title="6">          <span class="bu">close</span>(c)<span class="co">// 如果不close会出现死锁</span></a>
+<a class="sourceLine" id="cb40-7" title="7">      }()</a>
+<a class="sourceLine" id="cb40-8" title="8">      <span class="kw">for</span> v := <span class="kw">range</span> c{</a>
+<a class="sourceLine" id="cb40-9" title="9">          fmt.Println(v)</a>
+<a class="sourceLine" id="cb40-10" title="10">      }</a>
+<a class="sourceLine" id="cb40-11" title="11">  }</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb41"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb41-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb41-2" title="2">      runtime.GOMAXPROCS(runtime.NumCPU()) <span class="co">//获得当前CPU的核数并设置</span></a>
+<a class="sourceLine" id="cb41-3" title="3">      c := <span class="bu">make</span>(<span class="kw">chan</span> <span class="dt">bool</span>, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb41-4" title="4">      <span class="kw">for</span> i:= <span class="dv">0</span>;i&lt;<span class="dv">10</span>;i++{</a>
+<a class="sourceLine" id="cb41-5" title="5">          <span class="kw">go</span> Go(c, i)</a>
+<a class="sourceLine" id="cb41-6" title="6">      }</a>
+<a class="sourceLine" id="cb41-7" title="7">      <span class="kw">for</span> i := <span class="dv">0</span>;i&lt;<span class="dv">10</span>;i++ {<span class="co">//当每一个都执行完的时候，这个for循环就执行完了</span></a>
+<a class="sourceLine" id="cb41-8" title="8">          &lt;-c</a>
+<a class="sourceLine" id="cb41-9" title="9">      }</a>
+<a class="sourceLine" id="cb41-10" title="10">  }</a>
+<a class="sourceLine" id="cb41-11" title="11"></a>
+<a class="sourceLine" id="cb41-12" title="12">  <span class="kw">func</span> Go(c <span class="kw">chan</span> <span class="dt">bool</span>,index <span class="dt">int</span>)  {</a>
+<a class="sourceLine" id="cb41-13" title="13">      a := <span class="dv">0</span></a>
+<a class="sourceLine" id="cb41-14" title="14">      <span class="kw">for</span> i := <span class="dv">0</span> ;i &lt; <span class="dv">10000000</span>; i++{</a>
+<a class="sourceLine" id="cb41-15" title="15">          a += i</a>
+<a class="sourceLine" id="cb41-16" title="16">      }</a>
+<a class="sourceLine" id="cb41-17" title="17">      fmt.Println(index,a)</a>
+<a class="sourceLine" id="cb41-18" title="18">      c &lt;- <span class="ot">true</span></a>
+<a class="sourceLine" id="cb41-19" title="19">  }</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb42"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb42-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb42-2" title="2">      <span class="co">/*</span></a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="co">      - 每新建一个任务就增加一个任务数</span></a>
+<a class="sourceLine" id="cb42-4" title="4"><span class="co">      - 每完成一个任务就减少一个任务数</span></a>
+<a class="sourceLine" id="cb42-5" title="5"><span class="co">      - main函数中等待任务数为0</span></a>
+<a class="sourceLine" id="cb42-6" title="6"><span class="co">       */</span></a>
+<a class="sourceLine" id="cb42-7" title="7">      runtime.GOMAXPROCS(runtime.NumCPU()) <span class="co">//获得当前CPU的核数并设置</span></a>
+<a class="sourceLine" id="cb42-8" title="8">      wg := sync.WaitGroup{}</a>
+<a class="sourceLine" id="cb42-9" title="9">      <span class="kw">for</span> i:= <span class="dv">0</span>;i&lt;<span class="dv">10</span>;i++{</a>
+<a class="sourceLine" id="cb42-10" title="10">          <span class="kw">go</span> Go(&amp;wg, i)</a>
+<a class="sourceLine" id="cb42-11" title="11">          wg.Add(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb42-12" title="12">      }</a>
+<a class="sourceLine" id="cb42-13" title="13">      wg.Wait()</a>
+<a class="sourceLine" id="cb42-14" title="14">  }</a>
+<a class="sourceLine" id="cb42-15" title="15"></a>
+<a class="sourceLine" id="cb42-16" title="16">  <span class="kw">func</span> Go(wg *sync.WaitGroup,index <span class="dt">int</span>)  {</a>
+<a class="sourceLine" id="cb42-17" title="17">      a := <span class="dv">0</span></a>
+<a class="sourceLine" id="cb42-18" title="18">      <span class="kw">for</span> i := <span class="dv">0</span> ;i &lt; <span class="dv">10000000</span>; i++{</a>
+<a class="sourceLine" id="cb42-19" title="19">          a += i</a>
+<a class="sourceLine" id="cb42-20" title="20">      }</a>
+<a class="sourceLine" id="cb42-21" title="21">      fmt.Println(index,a)</a>
+<a class="sourceLine" id="cb42-22" title="22">      wg.Done()</a>
+<a class="sourceLine" id="cb42-23" title="23">  }</a></code></pre></div></li>
 <li></li>
+</ul></li>
+</ul></li>
+<li><p>select</p>
+<ul>
+<li><p>可处理一个或多个channel的发送与接收</p></li>
+<li><p>同时有多个可用的channel时按随机顺序处理</p></li>
+<li><p>可用空的select来阻塞main</p></li>
+<li><p>可以设置超时</p></li>
+<li><p>实例</p>
+<ul>
+<li><div class="sourceCode" id="cb43"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb43-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb43-2" title="2">      c1,c2 := <span class="bu">make</span>(<span class="kw">chan</span> <span class="dt">int</span>), <span class="bu">make</span>(<span class="kw">chan</span> <span class="dt">string</span>)</a>
+<a class="sourceLine" id="cb43-3" title="3">      o := <span class="bu">make</span>(<span class="kw">chan</span> <span class="dt">bool</span>,<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb43-4" title="4">      <span class="kw">go</span> <span class="kw">func</span>() {</a>
+<a class="sourceLine" id="cb43-5" title="5">          <span class="co">//a,b := false,false</span></a>
+<a class="sourceLine" id="cb43-6" title="6">          <span class="kw">for</span> {</a>
+<a class="sourceLine" id="cb43-7" title="7">              <span class="kw">select</span> {</a>
+<a class="sourceLine" id="cb43-8" title="8">              <span class="kw">case</span> v,ok := &lt;-c1:</a>
+<a class="sourceLine" id="cb43-9" title="9">                  <span class="kw">if</span> !ok{</a>
+<a class="sourceLine" id="cb43-10" title="10">                      <span class="co">//if !a{</span></a>
+<a class="sourceLine" id="cb43-11" title="11">                          o &lt;- <span class="ot">true</span></a>
+<a class="sourceLine" id="cb43-12" title="12">                          <span class="co">//a = !a</span></a>
+<a class="sourceLine" id="cb43-13" title="13">                      <span class="co">//}</span></a>
+<a class="sourceLine" id="cb43-14" title="14">                      <span class="kw">break</span></a>
+<a class="sourceLine" id="cb43-15" title="15">                  }</a>
+<a class="sourceLine" id="cb43-16" title="16">                  fmt.Println(<span class="dv">1</span>,v)</a>
+<a class="sourceLine" id="cb43-17" title="17">              <span class="kw">case</span> v,ok := &lt;-c2:</a>
+<a class="sourceLine" id="cb43-18" title="18">                  <span class="kw">if</span> !ok{</a>
+<a class="sourceLine" id="cb43-19" title="19">                      <span class="co">//if !b{</span></a>
+<a class="sourceLine" id="cb43-20" title="20">                          o &lt;- <span class="ot">true</span></a>
+<a class="sourceLine" id="cb43-21" title="21">                          <span class="co">//b = !b</span></a>
+<a class="sourceLine" id="cb43-22" title="22">                      <span class="co">//}</span></a>
+<a class="sourceLine" id="cb43-23" title="23">                      <span class="kw">break</span></a>
+<a class="sourceLine" id="cb43-24" title="24">                  }</a>
+<a class="sourceLine" id="cb43-25" title="25">                  fmt.Println(<span class="dv">2</span>,v)</a>
+<a class="sourceLine" id="cb43-26" title="26">              }</a>
+<a class="sourceLine" id="cb43-27" title="27">          }</a>
+<a class="sourceLine" id="cb43-28" title="28">      }()</a>
+<a class="sourceLine" id="cb43-29" title="29"></a>
+<a class="sourceLine" id="cb43-30" title="30">      c1 &lt;- <span class="dv">1</span></a>
+<a class="sourceLine" id="cb43-31" title="31">      c2 &lt;- <span class="st">&quot;hello&quot;</span></a>
+<a class="sourceLine" id="cb43-32" title="32">      c1 &lt;- <span class="dv">2</span></a>
+<a class="sourceLine" id="cb43-33" title="33">      c2 &lt;- <span class="st">&quot;hi&quot;</span></a>
+<a class="sourceLine" id="cb43-34" title="34">      <span class="bu">close</span>(c1)</a>
+<a class="sourceLine" id="cb43-35" title="35">      <span class="bu">close</span>(c2)</a>
+<a class="sourceLine" id="cb43-36" title="36">      <span class="kw">for</span> i:=<span class="dv">0</span> ;i&lt;<span class="dv">2</span> ;i++{</a>
+<a class="sourceLine" id="cb43-37" title="37">          &lt;-o</a>
+<a class="sourceLine" id="cb43-38" title="38">      }</a>
+<a class="sourceLine" id="cb43-39" title="39">  }</a></code></pre></div></li>
+<li><div class="sourceCode" id="cb44"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb44-1" title="1">  <span class="kw">func</span> main()  {</a>
+<a class="sourceLine" id="cb44-2" title="2">      c := <span class="bu">make</span>(<span class="kw">chan</span> <span class="dt">bool</span>)</a>
+<a class="sourceLine" id="cb44-3" title="3">      <span class="kw">select</span> {</a>
+<a class="sourceLine" id="cb44-4" title="4">      <span class="kw">case</span> v:= &lt;-c:</a>
+<a class="sourceLine" id="cb44-5" title="5">          fmt.Println(v)</a>
+<a class="sourceLine" id="cb44-6" title="6">      <span class="kw">case</span> &lt;-time.After(<span class="dv">3</span> * time.Second):</a>
+<a class="sourceLine" id="cb44-7" title="7">          fmt.Println(<span class="st">&quot;超时&quot;</span>)</a>
+<a class="sourceLine" id="cb44-8" title="8">      }</a>
+<a class="sourceLine" id="cb44-9" title="9">  }</a></code></pre></div></li>
+<li></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 <section class="footnotes" role="doc-endnotes">
