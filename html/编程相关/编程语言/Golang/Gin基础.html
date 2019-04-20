@@ -1,0 +1,36 @@
+<h1 id="gin基础">Gin基础</h1>
+<ul>
+<li><p>gin安装</p>
+<ul>
+<li><p><code>go get github.com/gin-gonic/gin</code></p></li>
+<li><p>一个简单的gin实例</p>
+<ul>
+<li><div class="sourceCode" id="cb1"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb1-1" title="1">  <span class="kw">import</span> (</a>
+<a class="sourceLine" id="cb1-2" title="2">      <span class="st">&quot;github.com/gin-gonic/gin&quot;</span></a>
+<a class="sourceLine" id="cb1-3" title="3">      <span class="st">&quot;net/http&quot;</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  )</a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">func</span> main(){</a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8">      router := gin.Default()</a>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10">      router.GET(<span class="st">&quot;/&quot;</span>, <span class="kw">func</span>(c *gin.Context) {</a>
+<a class="sourceLine" id="cb1-11" title="11">          c.String(http.StatusOK, <span class="st">&quot;Hello World&quot;</span>)</a>
+<a class="sourceLine" id="cb1-12" title="12">      })</a>
+<a class="sourceLine" id="cb1-13" title="13">      router.Run(<span class="st">&quot;:8000&quot;</span>)</a>
+<a class="sourceLine" id="cb1-14" title="14">  }</a></code></pre></div></li>
+</ul></li>
+</ul></li>
+<li><p>RESTFUL路由</p>
+<ul>
+<li><p>GET类型的路由</p>
+<ul>
+<li><pre><code>  router.GET(&quot;/&quot;, func(c *gin.Context) {})</code></pre></li>
+</ul></li>
+<li><p>POST类型的路由</p>
+<ul>
+<li><div class="sourceCode" id="cb3"><pre class="sourceCode go"><code class="sourceCode go"><a class="sourceLine" id="cb3-1" title="1">  router.POST(<span class="st">&quot;/&quot;</span>, <span class="kw">func</span>(c *gin.Context) {})</a></code></pre></div></li>
+<li></li>
+</ul></li>
+</ul></li>
+</ul>
