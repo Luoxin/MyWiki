@@ -1,3 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>F:\我们温暖的家\MyWiki分享的文件\MyWiki/html/编程相关/数据库/MySQL/编码经验/2059错误.html</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="misty-light-windows.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
 <h1 id="mysql2059连接错误解决方案">MySQL2059连接错误解决方案</h1>
 <ol type="1">
 <li><p>Plan 1<br />
@@ -5,3 +24,5 @@
 <p><code>ALTER USER 'root'@'localhost' IDENTIFIED BY 'password' PASSWORD EXPIRE NEVER; #修改加密规则   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'; #更新一下用户的密码   FLUSH PRIVILEGES; #刷新权限</code></p></li>
 <li><p>更新驱动</p></li>
 </ol>
+</body>
+</html>

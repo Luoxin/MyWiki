@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>F:\我们温暖的家\MyWiki分享的文件\MyWiki/html/编程相关/编程语言/Golang/测试项目/验证码服务/技术方案.html</title>
+  <style>
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="misty-light-windows.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<ul>
+<li><p>gin，微服务框架，暂且理解为python的flask</p></li>
+<li><p>服务要求：http的服务，用gin框架，需要两个接口</p>
+<ol type="1">
+<li>生成验证码接口，输入：无；输出：图片，验证码ID（随机串）</li>
+<li>验验证码接口，输入：验证码ID，用户输入串；输出：是否正确</li>
+</ol></li>
+<li><p>大体思路：</p>
+<ul>
+<li><p>生成验证码接口</p>
+<ul>
+<li>根据用户IP来选择生成验证码类型（<strong>暂时不考虑</strong>）
+<ul>
+<li>方案1：如果是在某一段时间内第一次使用，则提供简单的验证码，否则递增难度
+<ul>
+<li>可能会占用更多的内存</li>
+</ul></li>
+<li>方案2：根据时间与ip进行运算决定返回给用户的验证码类型
+<ul>
+<li>可能会对正常用户产生不好的用户体验</li>
+</ul></li>
+</ul></li>
+<li>生成一个验证码
+<ul>
+<li>存在的：纯数字字母 ， 存在噪点的纯文字 ，数字的加减乘除运算， git图片验证码，滑块， 成语验证码 ， 图片识别</li>
+<li>建议使用gif的图片作为验证</li>
+</ul></li>
+<li>生成一个随机的字符串（<strong>暂时不考虑，默认不会重复</strong>）
+<ul>
+<li>利用uuid</li>
+<li>验证随机字符串是否存在缓存中，如果存在则重新生成</li>
+<li>将字符串与上一步生成的结果配对并临时存储（<strong>仍需完成</strong>）
+<ul>
+<li>对缓存设定缓存时长，超过时间的就自动清除</li>
+</ul></li>
+</ul></li>
+<li>返回验证码图片以及验证码ID</li>
+</ul></li>
+<li><p>验验证码接口</p>
+<ul>
+<li>根据验证码ID查找缓存中存储的结果</li>
+<li>验证用户的输入串与缓存中的结果是否一致
+<ul>
+<li>如果没有找到缓存，则认为结果为不一致</li>
+</ul></li>
+<li>清空当前验证码ID存储的缓存</li>
+<li>返回给用户正确与否的结果(bool)</li>
+</ul></li>
+</ul></li>
+</ul>
+</body>
+</html>
