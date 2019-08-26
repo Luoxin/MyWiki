@@ -10,4 +10,8 @@
 
 ### 生成Putty秘钥
 - 下载`puttygen`,下载地址`https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html`
-- 
+
+
+## 使用ssh登陆远端服务器
+- 在远端服务器的 `/<username>/.ssh/authorized_keys` 中添加公钥并重启服务 `service sshd restart`
+- 在本机使用指令登陆 `ssh ssh://<username>@<host>:22`
