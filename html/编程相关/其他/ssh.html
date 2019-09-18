@@ -33,7 +33,11 @@
 <h3 id="生成putty秘钥">生成Putty秘钥</h3>
 <ul>
 <li>下载<code>puttygen</code>,下载地址<code>https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html</code></li>
-<li></li>
+</ul>
+<h2 id="使用ssh登陆远端服务器">使用ssh登陆远端服务器</h2>
+<ul>
+<li>在远端服务器的 <code>/&lt;username&gt;/.ssh/authorized_keys</code> 中添加公钥并重启服务 <code>service sshd restart</code></li>
+<li>在本机使用指令登陆 <code>ssh ssh://&lt;username&gt;@&lt;host&gt;:22</code></li>
 </ul>
 </body>
 </html>
